@@ -36,7 +36,7 @@ class _MyDetailNotificationsCardsPageState
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Մանրամ    ասն',
+          'Մանրամասն',
           style: TextStyle(color: Colors.white),
         ),
         actions: [
