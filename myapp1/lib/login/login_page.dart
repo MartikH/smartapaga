@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:myapp1/feature/presentation/pages/profiles/profiles.dart';
 import 'package:myapp1/login/forgot_password.dart';
-import 'package:myapp1/login/registrationOrEntry.dart';
-import 'package:myapp1/profiles/profiles.dart';
 import '../constant.dart';
-import 'package:flutter_svg/svg.dart';
-
 import '../notifications/notification_day.dart';
 
 class MyLoginPage extends StatefulWidget {

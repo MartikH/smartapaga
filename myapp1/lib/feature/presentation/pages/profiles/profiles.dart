@@ -4,12 +4,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:myapp1/constant.dart';
-
+import 'package:myapp1/feature/presentation/pages/profiles/chang_password.dart';
+import 'package:myapp1/feature/presentation/pages/profiles/new_car.dart';
+import 'package:myapp1/login/login_page.dart';
 import 'package:myapp1/notifications/notification_cards.dart';
-import 'package:myapp1/profiles/chang_password.dart';
-import 'package:myapp1/profiles/new_car.dart';
 import 'package:image_picker/image_picker.dart';
-import '../login/login_page.dart';
+
 
 enum SingingCharacter {
   oneHundredToThreeHundred,
