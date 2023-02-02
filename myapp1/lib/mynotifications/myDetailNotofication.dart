@@ -1,7 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+
 import 'package:myapp1/constant.dart';
+import 'package:myapp1/feature/presentation/states/users_state_mobx.dart';
 import 'package:myapp1/mynotifications/myAllNotifications.dart';
 import 'package:myapp1/mynotifications/qrcode/qr_creat_page.dart';
 
@@ -26,8 +29,17 @@ class MyDetailNotificationsCardsPage extends StatefulWidget {
 
 class _MyDetailNotificationsCardsPageState
     extends State<MyDetailNotificationsCardsPage> {
+  final user_state = UserState();
 
-
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getData();
+  // }
+  //
+  // Future<void> getData() async {
+  //   await user_state.getDataAll();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +65,6 @@ class _MyDetailNotificationsCardsPageState
             ),
           ),
         ],
-
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -71,303 +82,333 @@ class _MyDetailNotificationsCardsPageState
           ),
           Expanded(
             child: Container(
-              //width: MediaQuery.of(context).size.width,
-
-              // width: 350,
-              child: ListView.builder(
-                  padding: EdgeInsets.all(8),
-                  itemBuilder: (context, i) {
-                    return Card(
-                      color: Colors.grey.shade100,
-                      //elevation: 3,
-                      child: Column(children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Padding(
-                            padding: const EdgeInsets.all(15.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
+              width: double.infinity,
+              height: 400,
+              child: Observer(builder: (context) {
+                if (user_state.userModelList == Null) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  return ListView.builder(
+                      padding: EdgeInsets.all(8),
+                      itemCount: user_state.userModelList.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          color: Colors.grey.shade100,
+                          //elevation: 3,
+                          child: Column(children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding: const EdgeInsets.all(15.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    IconButton(
-                                      onPressed: () {
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) =>
-                                        //             myAllNotificationByFiltredPage()));
-                                      },
-                                      icon: Icon(Icons.calendar_month_outlined),
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {
+                                            // Navigator.push(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (context) =>
+                                            //             myAllNotificationByFiltredPage()));
+                                          },
+                                          icon: Icon(
+                                              Icons.calendar_month_outlined),
+                                        ),
+                                        Text('07 /12 / 23'),
+                                      ],
                                     ),
-                                    Text('07 /12 / 23'),
+                                    Row(
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {
+                                            // Navigator.push(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (context) => RegionCheckbox()));
+                                          },
+                                          icon: Icon(Icons.access_time),
+                                        ),
+                                        Text('15:45-16:00'),
+                                      ],
+                                    ),
                                   ],
                                 ),
-                                Row(
+                              ),
+                            ),
+                            Divider(
+                              color: Colors.grey,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Icon(Icons.person_outline),
+                                  Text(
+                                      '${user_state.userModelList[index].name}'),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Icon(Icons.phone_outlined),
+                                  Text('+374-94-53-01-95'),
+                                ],
+                              ),
+                            ),
+                            Divider(
+                              color: Colors.grey,
+                            ),
+                            Container(
+                              // height: 500,
+                              // width: 350,
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    IconButton(
-                                      onPressed: () {
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) => RegionCheckbox()));
-                                      },
-                                      icon: Icon(Icons.access_time),
+                                    Padding(
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: Container(
+                                        width: 40,
+                                        height: 100,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey.shade300),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                        ),
+                                        child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Icon(
+                                                    Icons.balance_outlined),
+                                              ),
+                                              Divider(
+                                                indent: 5,
+                                                endIndent: 5,
+                                                color: Colors.grey.shade300,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text('1'),
+                                              ),
+                                            ]),
+                                      ),
                                     ),
-                                    Text('15:45-16:00'),
-                                  ],
+                                    Padding(
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: Container(
+                                        width: 40,
+                                        height: 100,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey.shade300),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                        ),
+                                        child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Icon(
+                                                    Icons.list_alt_outlined),
+                                              ),
+                                              Divider(
+                                                indent: 5,
+                                                endIndent: 5,
+                                                color: Colors.grey.shade300,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text('3'),
+                                              ),
+                                            ]),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: Container(
+                                        width: 40,
+                                        height: 100,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey.shade300),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                        ),
+                                        child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Icon(
+                                                  Icons.lightbulb,
+                                                ),
+                                              ),
+                                              Divider(
+                                                indent: 5,
+                                                endIndent: 5,
+                                                color: Colors.grey.shade300,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text('23'),
+                                              ),
+                                            ]),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: Container(
+                                        width: 40,
+                                        height: 100,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey.shade300),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                        ),
+                                        child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Icon(Icons.shopping_bag),
+                                              ),
+                                              Divider(
+                                                indent: 5,
+                                                endIndent: 5,
+                                                color: Colors.grey.shade300,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Text('1'),
+                                              ),
+                                            ]),
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+                            Divider(
+                              color: Colors.grey.shade300,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Icon(Icons.navigation_outlined),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Շենգավիթ, Շիրակի փողոց, 1/68 շենք 1',
+                                    style: TextStyle(fontSize: 17),
+                                  ),
                                 ),
                               ],
                             ),
-                          ),
-                        ),
-                        Divider(
-                          color: Colors.grey,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(Icons.person_outline),
-                              Text('Արևիկ Պետրոսյան'),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(Icons.phone_outlined),
-                              Text('+374-94-53-01-95'),
-                            ],
-                          ),
-                        ),
-                        Divider(
-                          color: Colors.grey,
-                        ),
-                        Container(
-                          // height: 500,
-                          // width: 350,
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: Container(
-                                    width: 40,
-                                    height: 100,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.grey.shade300),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                    ),
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Icon(Icons.balance_outlined),
-                                          ),
-                                          Divider(
-                                            indent: 5,
-                                            endIndent: 5,
-                                            color: Colors.grey.shade300,
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text('1'),
-                                          ),
-                                        ]),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: Container(
-                                    width: 40,
-                                    height: 100,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.grey.shade300),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                    ),
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child:
-                                                Icon(Icons.list_alt_outlined),
-                                          ),
-                                          Divider(
-                                            indent: 5,
-                                            endIndent: 5,
-                                            color: Colors.grey.shade300,
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text('3'),
-                                          ),
-                                        ]),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: Container(
-                                    width: 40,
-                                    height: 100,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.grey.shade300),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                    ),
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Icon(
-                                              Icons.lightbulb,
-                                            ),
-                                          ),
-                                          Divider(
-                                            indent: 5,
-                                            endIndent: 5,
-                                            color: Colors.grey.shade300,
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text('23'),
-                                          ),
-                                        ]),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: Container(
-                                    width: 40,
-                                    height: 100,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.grey.shade300),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                    ),
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Icon(Icons.shopping_bag),
-                                          ),
-                                          Divider(
-                                            indent: 5,
-                                            endIndent: 5,
-                                            color: Colors.grey.shade300,
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text('1'),
-                                          ),
-                                        ]),
-                                  ),
-                                ),
-                              ]),
-                        ),
-                        Divider(
-                          color: Colors.grey.shade300,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Icon(Icons.navigation_outlined),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Շենգավիթ, Շիրակի փողոց, 1/68 շենք 1',
-                                style: TextStyle(fontSize: 17),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey.shade300),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    'Մուտք',
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                ),
                               ),
                             ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey.shade300),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            Align(
+                              alignment: Alignment.centerLeft,
                               child: Text(
-                                'Մուտք',
+                                'Գումարը $paymentControler դրամ',
                                 style: TextStyle(fontSize: 18),
                               ),
                             ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Գումարը $paymentControler դրամ',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ),
-                        Divider(
-                          color: Colors.grey,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ElevatedButton(
-                                style: ButtonStyle(
-                                    backgroundColor: MaterialStatePropertyAll<Color>(Colors.white),
-                                ),
-                                onPressed: () {},
-                                child: Text('Չեղարկել', style: TextStyle(color: Colors.grey),),
-                              ),
+                            Divider(
+                              color: Colors.grey,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ElevatedButton(
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStatePropertyAll<Color>(Colors.green),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStatePropertyAll<Color>(
+                                              Colors.white),
+                                    ),
+                                    onPressed: () {},
+                                    child: Text(
+                                      'Չեղարկել',
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                  ),
                                 ),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              QRCreatePage()));
-
-                                },
-                                child: Text('Վերցնել', style: TextStyle(color: Colors.white)),
-                              ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStatePropertyAll<Color>(
+                                              Colors.green),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  QRCreatePage()));
+                                    },
+                                    child: Text('Վերցնել',
+                                        style: TextStyle(color: Colors.white)),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      ]),
-                    );
-                  }),
+                          ]),
+                        );
+                      });
+                  //return Center(child: Text("No data", style: TextStyle(fontSize: 20),));
+                }
+              }),
             ),
           ),
           Align(

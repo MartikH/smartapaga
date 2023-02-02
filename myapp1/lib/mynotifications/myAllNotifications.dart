@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:myapp1/feature/presentation/states/users_state_mobx.dart';
 import 'package:myapp1/mynotifications/myAllNotificationsByFiltred.dart';
 import 'package:myapp1/mynotifications/myDetailNotofication.dart';
 
@@ -22,7 +23,11 @@ class MyAllNotificationsCardsPage extends StatefulWidget {
   _MyAllNotificationsCardsPageState createState() =>
       _MyAllNotificationsCardsPageState();
 }
+final user_state = UserState();
 
+Future<void> getData() async {
+    await user_state.getDataAll();
+  }
 class _MyAllNotificationsCardsPageState
     extends State<MyAllNotificationsCardsPage> {
   @override
@@ -68,6 +73,7 @@ class _MyAllNotificationsCardsPageState
                 children: [
                   IconButton(
                     onPressed: () {
+                      getData();
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -77,7 +83,8 @@ class _MyAllNotificationsCardsPageState
                     icon: Icon(Icons.tune_outlined),
                   ),
                   IconButton(
-                    onPressed: () {
+
+                      onPressed: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
