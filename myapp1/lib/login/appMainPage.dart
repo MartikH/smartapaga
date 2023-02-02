@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:myapp1/constant.dart';
 import 'package:myapp1/login/registrationOrEntry.dart';
 
-
 class AppMainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -20,6 +19,7 @@ class AppMainPage extends StatelessWidget {
         child: Expanded(
           child: InkWell(
             child: Center(
+
               child: AnimatedTextKit(
                 animatedTexts: [
                   ColorizeAnimatedText(

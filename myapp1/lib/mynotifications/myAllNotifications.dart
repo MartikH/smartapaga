@@ -23,11 +23,14 @@ class MyAllNotificationsCardsPage extends StatefulWidget {
   _MyAllNotificationsCardsPageState createState() =>
       _MyAllNotificationsCardsPageState();
 }
-final user_state = UserState();
 
-Future<void> getData() async {
-    await user_state.getDataAll();
-  }
+// final user_state =
+//     UserState(); //----------------------------------------------------------------------------------------crate user_state from UserState()
+
+// Future<void> getData() async {
+//   await user_state.getDataAll();
+// }
+
 class _MyAllNotificationsCardsPageState
     extends State<MyAllNotificationsCardsPage> {
   @override
@@ -49,7 +52,6 @@ class _MyAllNotificationsCardsPageState
             ),
           ),
         ],
-
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -73,7 +75,7 @@ class _MyAllNotificationsCardsPageState
                 children: [
                   IconButton(
                     onPressed: () {
-                      getData();
+                      // getData(); //----------------------------------------------------------------------------------------------invoke async function
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -83,12 +85,13 @@ class _MyAllNotificationsCardsPageState
                     icon: Icon(Icons.tune_outlined),
                   ),
                   IconButton(
-
-                      onPressed: () {
+                    onPressed: () {
+                      //  getData();
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MyDetailNotificationsCardsPage()));
+                              builder: (context) =>
+                                  MyDetailNotificationsCardsPage()));
                     },
                     icon: Icon(Icons.table_chart_outlined),
                   ),

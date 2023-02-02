@@ -1,4 +1,4 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
+//import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'notifications/checkbox/checkBoxState.dart';
@@ -69,7 +69,7 @@ class BorderPainter extends CustomPainter {
 
     Paint paint = Paint()
       ..color = Colors.red
-    // ..color = Color.fromARGB(255, 54, 99, 248)
+      // ..color = Color.fromARGB(255, 54, 99, 248)
       ..strokeWidth = 1
       ..style = PaintingStyle.stroke;
 
@@ -116,15 +116,14 @@ class BorderPainter extends CustomPainter {
 //-------------------------------------
 //---------------MyClipper---------
 
-class MyClipperAvatar extends CustomClipper<Rect>{
+class MyClipperAvatar extends CustomClipper<Rect> {
   @override
-  Rect getClip(Size size){
-
-return Rect.fromLTWH(0,0,165,165);
-  }
-  bool shouldReclip(oldClipper){
-return false;
+  Rect getClip(Size size) {
+    return Rect.fromLTWH(0, 0, 165, 165);
   }
 
+  bool shouldReclip(oldClipper) {
+    return false;
+  }
 }
 //-----------------------

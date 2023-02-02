@@ -31,15 +31,15 @@ class _MyDetailNotificationsCardsPageState
     extends State<MyDetailNotificationsCardsPage> {
   final user_state = UserState();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   getData();
-  // }
-  //
-  // Future<void> getData() async {
-  //   await user_state.getDataAll();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  Future<void> getData() async {
+    await user_state.getDataAll();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +85,7 @@ class _MyDetailNotificationsCardsPageState
               width: double.infinity,
               height: 400,
               child: Observer(builder: (context) {
+                //-------------------------------------------------------------------------------------------------------Observer
                 if (user_state.userModelList == Null) {
                   return Center(
                     child: CircularProgressIndicator(),
@@ -151,7 +152,8 @@ class _MyDetailNotificationsCardsPageState
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Icon(Icons.person_outline),
+                                  Icon(Icons
+                                      .person_outline), //------------------------------------------------------------------data from API
                                   Text(
                                       '${user_state.userModelList[index].name}'),
                                 ],
@@ -329,7 +331,7 @@ class _MyDetailNotificationsCardsPageState
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                     'Շենգավիթ, Շիրակի փողոց, 1/68 շենք 1',
-                                    style: TextStyle(fontSize: 17),
+                                    style: TextStyle(fontSize: 13),
                                   ),
                                 ),
                               ],
